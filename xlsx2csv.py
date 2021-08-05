@@ -43,7 +43,7 @@ if input_file is None:
 file_name = os.path.basename(input_file)
 
 #create output path
-output_file = input_file.replace('xlsx','csv')
+output_file = output_folder + '\\' + file_name.replace('xlsx','csv')
 
 #import excel file
 df = pd.read_excel (input_file)
