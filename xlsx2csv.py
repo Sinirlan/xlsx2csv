@@ -8,7 +8,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Utility converting xlsx files to csv with optional custom delimiter')
 parser.add_argument('-i', '--input', action="store", help='Input xlsx file')
 parser.add_argument('-o', '--output', action="store",  help='Folder to which output file will be saved. If not specified will save in same location as input file (If contains spaces enclose in quotation marks)')
-parser.add_argument('-d', '--delimiter', action="store", help='Define delimiter, if empty default delimiter (comma) will be used')
+parser.add_argument('-d', '--delimiter', action="store", help='Define delimiter, if empty default delimiter (comma) will be used, only one character allowed')
 parser.add_argument('-a', '--ascii', action="store_true", help='Flag if delimiter is provided as ASCII code')
 
  # if no parameters entered show help (-h)
@@ -31,13 +31,13 @@ elif delimiter_str and not IsASCII_flg:
 else:
     delimiter = ','
 
-# if output folder was not specified then use current folder as output
-if output_folder is None:      
-    output_folder = os.getcwd()
-
 # if list with urls is not specified exit program with message
 if input_file is None: 
     sys.exit("Input file was not specified")
+
+# if output folder was not specified then use current folder as output
+if output_folder is None:      
+    output_folder = os.path.dirname(input_file)
 
 #get filename for output
 file_name = os.path.basename(input_file)
